@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import '../services/basicConfig.dart';
 import 'models/user_model.dart.dart';
