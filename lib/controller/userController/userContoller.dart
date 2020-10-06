@@ -25,6 +25,7 @@ class UserController {
         .login(body: user)
         .catchError((e) =>
             errorMessage(scaffold: scaffoldKey, message: 'Opps! Try again.'));
+    print(_fetchData);
     return _fetchData;
   }
 

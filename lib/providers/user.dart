@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import '../services/basicConfig.dart';
 import 'models/user_model.dart.dart';
@@ -13,6 +15,9 @@ class UserProvider extends BaseConfigAPI with ChangeNotifier {
       );
       currentUser.setUserData(data);
       notifyListeners();
+      print("Data : $data");
+      User user = User.fromJson(data);
+      print(user.token);
       return [data];
     } catch (e) {
       print(e);
