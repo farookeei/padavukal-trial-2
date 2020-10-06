@@ -43,19 +43,19 @@ class _TabsScreenState extends State<TabsScreen> {
     final _items = [
       BottomNavigationBarItem(
         icon: Icon(MdiIcons.home),
-        title: Text("Home"),
+        label: "Home",
       ),
       BottomNavigationBarItem(
         icon: Icon(MdiIcons.textSubject),
-        title: Text("Test"),
+        label: "Test",
       ),
       BottomNavigationBarItem(
         icon: Icon(MdiIcons.book),
-        title: Text("Blog"),
+        label: "Blog",
       ),
       BottomNavigationBarItem(
         icon: Icon(MdiIcons.account),
-        title: Text("Profile"),
+        label: "Profile",
       )
     ];
     return Scaffold(
