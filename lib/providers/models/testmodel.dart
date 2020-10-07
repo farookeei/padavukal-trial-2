@@ -8,4 +8,12 @@ class TestModel {
     this.id,
     this.test,
   });
+
+  factory TestModel.fromJson(Map<String, dynamic> json) {
+    return TestModel(
+      chapters: json['chapters'],
+      id: json['id'],
+      test: json['test'],
+    );
+  }
 }

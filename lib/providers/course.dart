@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:padavukal/providers/models/testmodel.dart';
 import 'package:padavukal/services/basicConfig.dart';
 
 import 'models/chapter_model.dart';
@@ -12,6 +13,19 @@ class CourseProvider extends BaseConfigAPI with ChangeNotifier {
   List<CourseModel> _courseData;
   List<SubjectModel> _subjectData = [];
   List<ChapterModel> _chapterData = [];
+
+  SubjectModel _currentSubject = SubjectModel(
+    id: -1,
+    name: null,
+  );
+
+  SubjectModel get currentSubject => _currentSubject;
+
+  setcurrentSubject(SubjectModel subjectModel) {
+    _currentSubject = subjectModel;
+    notifyListeners();
+  }
+
   // List<VideoModel> _videoData = [];
 
   // List<VideoModel> get videoData {
@@ -92,6 +106,8 @@ class CourseProvider extends BaseConfigAPI with ChangeNotifier {
           SubjectModel().fromJson(e),
         );
       });
+
+      if (_subjectData.length > 0) setcurrentSubject(_subjectData.first);
       isLoading = false;
       notifyListeners(); //* check if necessary
       return _fetchData;
@@ -127,7 +143,7 @@ class CourseProvider extends BaseConfigAPI with ChangeNotifier {
   }
 
   //* the id received here is chapter id
-  Future<void> retrieveTest(
+  Future<List<TestModel>> retrieveTest(
       {@required String userToken, @required int id}) async {
     try {
       if (userToken == null) return null;
@@ -135,6 +151,9 @@ class CourseProvider extends BaseConfigAPI with ChangeNotifier {
       List _fetchData =
           await getAPI(url: "/api/test/?list=true&id=$id", token: userToken);
       print(_fetchData);
+      List<TestModel> result =
+          _fetchData.map<TestModel>((e) => TestModel.fromJson(e)).toList();
+      return result;
     } catch (e) {
       print(e);
       throw e;
