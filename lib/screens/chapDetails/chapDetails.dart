@@ -21,11 +21,13 @@ class _ChapDetailsState extends State<ChapDetails> {
   @override
   void initState() {
     _controller = YoutubePlayerController(
-        flags: YoutubePlayerFlags(
-          autoPlay: true,
-          mute: true,
-        ),
-        initialVideoId: YoutubePlayer.convertUrlToId(videoURL));
+      flags: YoutubePlayerFlags(
+        autoPlay: true,
+        mute: true,
+        controlsVisibleAtStart: true,
+      ),
+      initialVideoId: YoutubePlayer.convertUrlToId(videoURL),
+    );
 
     super.initState();
   }

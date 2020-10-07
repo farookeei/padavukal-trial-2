@@ -52,6 +52,9 @@ class _MyAppState extends State<MyApp> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.blue[100], // status bar color
+    ));
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(

@@ -11,24 +11,15 @@ class TabsScreen extends StatefulWidget {
 }
 
 class _TabsScreenState extends State<TabsScreen> {
-  List<Map<String, Object>> _pages;
   int _selectedPageIndex = 0;
+  PageController _pageController;
+
   @override
   void initState() {
-    _pages = [
-      {
-        'page': HomeScreen(),
-      },
-      {
-        'page': TestOverviewScreen(),
-      },
-      {
-        'page': TestOverviewScreen(),
-      },
-      {
-        'page': ProfileScreen(),
-      },
-    ];
+    _pageController = PageController(
+      initialPage: _selectedPageIndex,
+      keepPage: true,
+    );
     super.initState();
   }
 
@@ -36,30 +27,27 @@ class _TabsScreenState extends State<TabsScreen> {
     setState(() {
       _selectedPageIndex = index;
     });
+    _pageController.animateToPage(
+      _selectedPageIndex,
+      duration: Duration(milliseconds: 500),
+      curve: Curves.easeIn,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final _items = [
-      BottomNavigationBarItem(
-        icon: Icon(MdiIcons.home),
-        label: "Home",
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(MdiIcons.textSubject),
-        label: "Test",
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(MdiIcons.book),
-        label: "Blog",
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(MdiIcons.account),
-        label: "Profile",
-      )
-    ];
     return Scaffold(
-      body: _pages[_selectedPageIndex]["page"],
+      // body: _pages[_selectedPageIndex]["page"],
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: (value) => setState(() => _selectedPageIndex = value),
+        children: [
+          HomeScreen(),
+          TestOverviewScreen(),
+          TestOverviewScreen(),
+          ProfileScreen(),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
         currentIndex: _selectedPageIndex,
@@ -67,7 +55,24 @@ class _TabsScreenState extends State<TabsScreen> {
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white38,
         type: BottomNavigationBarType.fixed,
-        items: _items,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(MdiIcons.home),
+            label: "Home",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(MdiIcons.textSubject),
+            label: "Test",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(MdiIcons.book),
+            label: "Blog",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(MdiIcons.account),
+            label: "Profile",
+          ),
+        ],
       ),
     );
   }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:padavukal/controller/courseController/courseController.dart';
 import 'package:padavukal/providers/course.dart';
 import 'package:padavukal/providers/models/coursemodel.dart';
+import 'package:padavukal/providers/models/user_model.dart.dart';
+import 'package:padavukal/providers/user.dart';
 import 'package:padavukal/screens/razorpay/razorpay.dart';
 import 'package:padavukal/screens/tabsScreen/tabs_screen.dart';
 import 'package:padavukal/widgets/loading/loading.dart';
@@ -66,6 +68,20 @@ class _CourseScreenState extends State<CourseScreen> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          User currentUser =
+              Provider.of<UserProvider>(context, listen: false).currentUser;
+
+          await Provider.of<CourseProvider>(context, listen: false)
+              .retrieveTest(userToken: currentUser.token, id: 1);
+          await Provider.of<CourseProvider>(context, listen: false)
+              .retrieveQuestions(userToken: currentUser.token, id: 1);
+        },
+        child: Icon(
+          Icons.ac_unit,
+        ),
+      ),
       key: _scaffoldKey,
       body: SafeArea(
         child: Container(
