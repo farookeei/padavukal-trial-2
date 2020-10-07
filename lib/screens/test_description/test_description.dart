@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:padavukal/providers/models/testmodel.dart';
 import 'package:padavukal/screens/test_page/testpage.dart';
 import 'package:padavukal/styles/styles.dart';
 import 'package:padavukal/widgets/buttons/BlueButton.dart';
@@ -9,6 +10,11 @@ import 'package:padavukal/widgets/buttons/popbutton.dart';
 
 class TestDescription extends StatelessWidget {
   static const routeName = "/test-desc";
+
+  final TestModel testInfo;
+
+  const TestDescription({Key key, @required this.testInfo}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final _height = MediaQuery.of(context).size.height;
@@ -104,7 +110,11 @@ class TestDescription extends StatelessWidget {
                   title: "Start Exam",
                   width: 150,
                   onPressed: () {
-                    Navigator.pushNamed(context, TestPage.routeName);
+                    Navigator.pushNamed(
+                      context,
+                      TestPage.routeName,
+                      arguments: testInfo,
+                    );
                   },
                 ),
               ),

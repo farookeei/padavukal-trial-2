@@ -44,7 +44,11 @@ class TestItemsWidget extends StatelessWidget {
                 trailing: IconButton(
                     icon: Icon(MdiIcons.forward),
                     onPressed: () {
-                      Navigator.pushNamed(context, TestDescription.routeName);
+                      Navigator.pushNamed(
+                        context,
+                        TestDescription.routeName,
+                        arguments: testData,
+                      );
                     }),
               ),
             ),

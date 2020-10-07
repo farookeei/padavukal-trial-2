@@ -1,28 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:padavukal/screens/chapDetails/chapDetails.dart';
-import 'package:padavukal/screens/splash_screen/splash_screen.dart';
+import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutter_windowmanager/flutter_windowmanager.dart';
-import 'package:padavukal/screens/course_screen/courses_screen.dart';
-import 'package:padavukal/providers/course.dart';
-import 'package:padavukal/providers/user.dart';
-import 'package:padavukal/screens/auth/login_screen.dart';
-import 'package:padavukal/screens/auth/signup_screen.dart';
-import 'package:padavukal/screens/home/homeScreen.dart';
-import 'package:padavukal/screens/onboardscreen/onboard_screen.dart';
-import 'package:padavukal/screens/otp_screen/otp_screen.dart';
-import 'package:padavukal/screens/profileScreen/profile_screen.dart';
-import 'package:padavukal/screens/razorpay/razorpay.dart';
-import 'package:padavukal/screens/test_analytics/test_analytics_screen.dart';
-import 'package:padavukal/screens/test_description/test_description.dart';
-import 'package:padavukal/screens/test_overview/test_overview.dart';
-import 'package:padavukal/screens/test_page/testpage.dart';
-import 'package:padavukal/styles/styles.dart';
-import 'package:padavukal/screens/tabsScreen/tabs_screen.dart';
-
+import 'providers/course.dart';
+import 'providers/user.dart';
+import 'screens/auth/login_screen.dart';
+import 'screens/auth/signup_screen.dart';
+import 'screens/chapDetails/chapDetails.dart';
 import 'screens/chapter_overview/chapterOverview_screen.dart';
+import 'screens/course_screen/courses_screen.dart';
+import 'screens/home/homeScreen.dart';
+import 'screens/onboardscreen/onboard_screen.dart';
+import 'screens/otp_screen/otp_screen.dart';
+import 'screens/profileScreen/profile_screen.dart';
+import 'screens/razorpay/razorpay.dart';
+import 'screens/splash_screen/splash_screen.dart';
+import 'screens/tabsScreen/tabs_screen.dart';
+import 'screens/test_analytics/test_analytics_screen.dart';
+import 'screens/test_description/test_description.dart';
+import 'screens/test_overview/test_overview.dart';
+import 'screens/test_page/testpage.dart';
+import 'styles/styles.dart';
 
 void main() {
   runApp(MyApp());
@@ -80,11 +79,27 @@ class _MyAppState extends State<MyApp> {
           ChapterOverView.routeName: (ctx) => ChapterOverView(),
           ChapDetails.routeName: (ctx) => ChapDetails(),
           TestOverviewScreen.routeName: (ctx) => TestOverviewScreen(),
-          TestDescription.routeName: (ctx) => TestDescription(),
           TestAnalyticsScreen.routeName: (ctx) => TestAnalyticsScreen(),
-          TestPage.routeName: (ctx) => TestPage(),
           ProfileScreen.routeName: (ctx) => ProfileScreen(),
           RazorPay.routeName: (ctx) => RazorPay(),
+        },
+        onGenerateRoute: (settings) {
+          switch (settings.name) {
+            case TestDescription.routeName:
+              return MaterialPageRoute(
+                builder: (context) => TestDescription(
+                  testInfo: settings.arguments,
+                ),
+              );
+            case TestPage.routeName:
+              return MaterialPageRoute(
+                builder: (context) => TestPage(
+                  testInfo: settings.arguments,
+                ),
+              );
+            default:
+              return null;
+          }
         },
       ),
     );

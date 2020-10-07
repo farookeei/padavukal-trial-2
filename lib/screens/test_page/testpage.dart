@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:padavukal/providers/models/testmodel.dart';
 import 'package:padavukal/screens/test_analytics/test_analytics_screen.dart';
 import 'package:padavukal/widgets/buttons/BlueButton.dart';
 import 'package:padavukal/widgets/buttons/popbutton.dart';
@@ -8,6 +9,11 @@ import 'package:padavukal/screens/test_page/widgets/testbuttons.dart';
 
 class TestPage extends StatelessWidget {
   static const routeName = "/test-page";
+
+  final TestModel testInfo;
+
+  const TestPage({Key key, @required this.testInfo}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
