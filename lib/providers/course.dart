@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:padavukal/providers/models/quiz/question.dart';
 import 'package:padavukal/providers/models/testmodel.dart';
 import 'package:padavukal/services/basicConfig.dart';
 
@@ -167,8 +168,11 @@ class CourseProvider extends BaseConfigAPI with ChangeNotifier {
       if (userToken == null) return null;
       if (userToken == "null") return null;
       List _fetchData = await getAPI(
-          url: "/api/question/?list=true&id=$id", token: userToken);
+        url: "/api/question/?list=true&id=$id",
+        token: userToken,
+      );
       print(_fetchData);
+      return _fetchData.map<Question>((e) => Question.fromJson(e)).toList();
     } catch (e) {
       print(e);
       throw e;

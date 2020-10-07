@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:padavukal/providers/course.dart';
 import 'package:padavukal/providers/models/testmodel.dart';
+import 'package:padavukal/providers/user.dart';
 import 'package:padavukal/screens/test_analytics/test_analytics_screen.dart';
 import 'package:padavukal/widgets/buttons/BlueButton.dart';
 import 'package:padavukal/widgets/buttons/popbutton.dart';
 import 'package:padavukal/screens/test_page/widgets/question_card.dart';
 import 'package:padavukal/screens/test_page/widgets/testbuttons.dart';
+import 'package:provider/provider.dart';
 
-class TestPage extends StatelessWidget {
+class TestPage extends StatefulWidget {
   static const routeName = "/test-page";
 
   final TestModel testInfo;
@@ -15,8 +18,19 @@ class TestPage extends StatelessWidget {
   const TestPage({Key key, @required this.testInfo}) : super(key: key);
 
   @override
+  _TestPageState createState() => _TestPageState();
+}
+
+class _TestPageState extends State<TestPage> {
+  CourseProvider courseProvider;
+  UserProvider userProvider;
+
+  @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
+    userProvider = Provider.of<UserProvider>(context, listen: false);
+    courseProvider = Provider.of<CourseProvider>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         leading: PopupButton(),
@@ -56,8 +70,31 @@ class TestPage extends StatelessWidget {
               ],
             ),
 
+            /// TODO : Adding loading here load the data then use your QuestionCard widget to show the questions
             ///
+            /// The retriveQuestions method will return a [List<Question>] which will include `question`/ `answer `&
+            /// 4choices named as `choiceA`,`choiceB`,`choiceC`,`choiceD`
+            ///
+            /// Add those as the choice and check if the selected choice is same as answer
             QuestionCard(deviceSize: deviceSize),
+
+            /// NOTE : Try to use futureBuilder for better perfomance
+
+            // FutureBuilder(
+            //   future: courseProvider.retrieveQuestions(
+            //     userToken: userProvider.currentUser.token,
+            //     id: widget.testInfo.id,
+            //   ),
+            //   builder: (BuildContext context, AsyncSnapshot snapshot) {
+            //     print(
+            //       "State : ${snapshot.connectionState} Body : ${snapshot.data}",
+            //     );
+
+            //     INFO : Edit your question card to include the data of questions
+            //     return QuestionCard(deviceSize: deviceSize);
+            //   },
+            // ),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

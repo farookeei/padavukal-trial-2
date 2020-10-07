@@ -21,6 +21,8 @@ dependencies:
   razorpay_flutter: ^1.2.2
   youtube_player_flutter: ^7.0.0+7
   flutter_windowmanager: ^0.0.1+1
+  flutter_pdfview: ^1.0.0+10
+  path_provider:
   share: ^0.6.5+2
 
 
