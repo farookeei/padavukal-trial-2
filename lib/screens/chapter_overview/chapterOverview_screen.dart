@@ -3,6 +3,7 @@ import 'package:padavukal/providers/course.dart';
 import 'package:padavukal/providers/models/chapter_model.dart';
 import 'package:padavukal/providers/models/subject_model.dart';
 import 'package:padavukal/providers/models/user_model.dart.dart';
+import 'package:padavukal/providers/models/video_model.dart';
 import 'package:padavukal/providers/user.dart';
 import 'package:padavukal/screens/chapDetails/chapDetails.dart';
 import 'package:padavukal/services/basicConfig.dart';
@@ -156,11 +157,17 @@ class ChapterWidget extends StatelessWidget {
               itemCount: chapterData.videos.length,
               //! have to make dynamic
               itemBuilder: (ctx, i) {
-                // final Chapter chapters = chapDetailsMaths[i];
+                final VideoModel videos = chapterData.videos[i];
                 return GestureDetector(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => ChapDetails()));
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => ChapDetails(
+                          videoUrl: videos.url,
+                        ),
+                      ),
+                    );
                   },
                   child: Container(
                       decoration: BoxDecoration(

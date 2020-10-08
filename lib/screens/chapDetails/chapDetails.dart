@@ -9,24 +9,31 @@ import 'widgets/related_videos.dart';
 class ChapDetails extends StatefulWidget {
   static const routeName = "/sub-details";
 
+  final String videoUrl;
+
+  const ChapDetails({
+    Key key,
+    @required this.videoUrl,
+  }) : super(key: key);
+
   @override
   _ChapDetailsState createState() => _ChapDetailsState();
 }
 
 class _ChapDetailsState extends State<ChapDetails> {
-  String videoURL = "https://youtu.be/80pRyn7fZRk";
+  // String videoURL = "https://youtu.be/80pRyn7fZRk";
 
   YoutubePlayerController _controller;
 
   @override
   void initState() {
+    print(widget.videoUrl);
     _controller = YoutubePlayerController(
       flags: YoutubePlayerFlags(
         autoPlay: true,
-        mute: true,
         controlsVisibleAtStart: true,
       ),
-      initialVideoId: YoutubePlayer.convertUrlToId(videoURL),
+      initialVideoId: YoutubePlayer.convertUrlToId(widget.videoUrl),
     );
 
     super.initState();
