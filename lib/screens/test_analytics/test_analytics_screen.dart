@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:padavukal/providers/models/quiz/question.dart';
 import 'package:padavukal/styles/styles.dart';
 import 'package:padavukal/widgets/buttons/BlueButton.dart';
 import 'package:padavukal/widgets/buttons/popbutton.dart';
@@ -7,8 +8,42 @@ import 'package:padavukal/screens/test_analytics/widgets/bottom_container.dart';
 import 'package:padavukal/screens/test_analytics/widgets/chart.dart';
 import 'package:padavukal/screens/test_analytics/widgets/result_bar.dart';
 
-class TestAnalyticsScreen extends StatelessWidget {
+class TestAnalyticsScreen extends StatefulWidget {
   static const routeName = "/test-analytics";
+
+  final List<Question> questions;
+
+  const TestAnalyticsScreen({
+    Key key,
+    @required this.questions,
+  }) : super(key: key);
+
+  @override
+  _TestAnalyticsScreenState createState() => _TestAnalyticsScreenState();
+}
+
+class _TestAnalyticsScreenState extends State<TestAnalyticsScreen> {
+  int total = 0, correct = 0, wrong = 0, unattempted = 0;
+
+  @override
+  void initState() {
+    widget.questions.forEach((element) {
+      print(element.selectedAnswer);
+      if (element.selectedAnswer == "") {
+        unattempted++;
+      } else {
+        if (element.selectedAnswer == element.answer)
+          correct++;
+        else
+          wrong++;
+      }
+    });
+
+    total = widget.questions.length;
+    print("Total : $correct/$total Unattempted : $unattempted");
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
@@ -45,21 +80,35 @@ class TestAnalyticsScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           ResultBar(
-                              color: Colors.red, count: 60, text: "Wrong"),
+                            color: Colors.red,
+                            count: wrong,
+                            text: "Wrong",
+                          ),
                           SizedBox(height: deviceSize.height * 0.01),
                           ResultBar(
-                              color: Colors.green, count: 60, text: "Correct"),
+                            color: Colors.green,
+                            count: correct,
+                            text: "Correct",
+                          ),
                           SizedBox(height: deviceSize.height * 0.01),
                           ResultBar(
                               color: Colors.grey,
-                              count: 120,
+                              count: unattempted,
                               text: "Unanswered"),
                           SizedBox(height: deviceSize.height * 0.01),
                         ],
                       ),
                     ),
                     SizedBox(width: 20),
-                    Flexible(flex: 4, child: Chart())
+                    Flexible(
+                      flex: 4,
+                      child: Chart(
+                        correct: correct,
+                        total: total,
+                        unattempted: unattempted,
+                        wrong: wrong,
+                      ),
+                    )
                   ],
                 ),
               ),

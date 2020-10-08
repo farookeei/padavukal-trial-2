@@ -79,7 +79,6 @@ class _MyAppState extends State<MyApp> {
           ChapterOverView.routeName: (ctx) => ChapterOverView(),
           ChapDetails.routeName: (ctx) => ChapDetails(),
           TestOverviewScreen.routeName: (ctx) => TestOverviewScreen(),
-          TestAnalyticsScreen.routeName: (ctx) => TestAnalyticsScreen(),
           ProfileScreen.routeName: (ctx) => ProfileScreen(),
           RazorPay.routeName: (ctx) => RazorPay(),
         },
@@ -95,6 +94,12 @@ class _MyAppState extends State<MyApp> {
               return MaterialPageRoute(
                 builder: (context) => TestPage(
                   testInfo: settings.arguments,
+                ),
+              );
+            case TestAnalyticsScreen.routeName:
+              return MaterialPageRoute(
+                builder: (context) => TestAnalyticsScreen(
+                  questions: settings.arguments,
                 ),
               );
             default:

@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:padavukal/providers/course.dart';
-import 'package:padavukal/providers/models/testmodel.dart';
-import 'package:padavukal/providers/user.dart';
-import 'package:padavukal/screens/test_analytics/test_analytics_screen.dart';
-import 'package:padavukal/widgets/buttons/BlueButton.dart';
-import 'package:padavukal/widgets/buttons/popbutton.dart';
-import 'package:padavukal/screens/test_page/widgets/question_card.dart';
-import 'package:padavukal/screens/test_page/widgets/testbuttons.dart';
 import 'package:provider/provider.dart';
+
+import '../../providers/course.dart';
+import '../../providers/models/quiz/question.dart';
+import '../../providers/models/testmodel.dart';
+import '../../providers/user.dart';
+import '../../widgets/buttons/BlueButton.dart';
+import '../../widgets/buttons/popbutton.dart';
+import '../test_analytics/test_analytics_screen.dart';
+import 'widgets/question_card.dart';
+import 'widgets/testbuttons.dart';
 
 class TestPage extends StatefulWidget {
   static const routeName = "/test-page";
@@ -25,11 +27,40 @@ class _TestPageState extends State<TestPage> {
   CourseProvider courseProvider;
   UserProvider userProvider;
 
+  PageController _pageController;
+  int index = 0;
+  int len = 0;
+
+  bool loading = false;
+  List<Question> questions;
+
+  setLoadingState() => setState(() => loading = !loading);
+
+  getAllQuestions() async {
+    setLoadingState();
+
+    questions = await courseProvider.retrieveQuestions(
+      userToken: userProvider.currentUser.token,
+      id: widget.testInfo.id,
+    );
+
+    len = questions.length;
+    setLoadingState();
+  }
+
+  @override
+  void initState() {
+    _pageController = PageController(initialPage: index, keepPage: true);
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final deviceSize = MediaQuery.of(context).size;
     userProvider = Provider.of<UserProvider>(context, listen: false);
     courseProvider = Provider.of<CourseProvider>(context, listen: false);
+
+    if (questions == null) getAllQuestions();
 
     return Scaffold(
       appBar: AppBar(
@@ -41,8 +72,13 @@ class _TestPageState extends State<TestPage> {
             child: BlueButton(
               title: "Submit",
               onPressed: () {
-                Navigator.pushReplacementNamed(
-                    context, TestAnalyticsScreen.routeName);
+                if (questions != null) {
+                  Navigator.pushReplacementNamed(
+                    context,
+                    TestAnalyticsScreen.routeName,
+                    arguments: questions,
+                  );
+                }
               },
             ),
           )
@@ -58,7 +94,7 @@ class _TestPageState extends State<TestPage> {
                 Row(
                   children: [
                     Icon(MdiIcons.noteOutline),
-                    Text("1/100"),
+                    Text("${index + 1}/$len"),
                   ],
                 ),
                 Row(
@@ -76,24 +112,22 @@ class _TestPageState extends State<TestPage> {
             /// 4choices named as `choiceA`,`choiceB`,`choiceC`,`choiceD`
             ///
             /// Add those as the choice and check if the selected choice is same as answer
-            QuestionCard(deviceSize: deviceSize),
 
             /// NOTE : Try to use futureBuilder for better perfomance
 
-            // FutureBuilder(
-            //   future: courseProvider.retrieveQuestions(
-            //     userToken: userProvider.currentUser.token,
-            //     id: widget.testInfo.id,
-            //   ),
-            //   builder: (BuildContext context, AsyncSnapshot snapshot) {
-            //     print(
-            //       "State : ${snapshot.connectionState} Body : ${snapshot.data}",
-            //     );
-
-            //     INFO : Edit your question card to include the data of questions
-            //     return QuestionCard(deviceSize: deviceSize);
-            //   },
-            // ),
+            !loading
+                ? Expanded(
+                    flex: 1,
+                    child: PageView.builder(
+                      controller: _pageController,
+                      onPageChanged: (value) => setState(() => index = value),
+                      itemBuilder: (context, index) => QuestionCard(
+                        question: questions[index],
+                      ),
+                      itemCount: questions.length,
+                    ),
+                  )
+                : CircularProgressIndicator(),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -101,10 +135,34 @@ class _TestPageState extends State<TestPage> {
                 Buttons(
                   icon: MdiIcons.chevronLeft,
                   text: "Back",
+                  onPress: () {
+                    if (index > 0) {
+                      setState(() {
+                        index--;
+                      });
+                      _pageController.animateToPage(
+                        index,
+                        duration: Duration(milliseconds: 250),
+                        curve: Curves.easeIn,
+                      );
+                    }
+                  },
                 ),
                 Buttons(
                   icon: MdiIcons.chevronRight,
                   text: "Next",
+                  onPress: () {
+                    if (index < len - 1) {
+                      setState(() {
+                        index++;
+                      });
+                      _pageController.animateToPage(
+                        index,
+                        duration: Duration(milliseconds: 250),
+                        curve: Curves.easeIn,
+                      );
+                    }
+                  },
                 ),
               ],
             ),

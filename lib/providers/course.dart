@@ -162,7 +162,7 @@ class CourseProvider extends BaseConfigAPI with ChangeNotifier {
   }
 
   //* id received here is test id
-  Future<void> retrieveQuestions(
+  Future<List<Question>> retrieveQuestions(
       {@required String userToken, @required int id}) async {
     try {
       if (userToken == null) return null;

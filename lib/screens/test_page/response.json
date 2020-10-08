@@ -1,0 +1,66 @@
+[
+    {
+        "id": 1,
+        "question" : "What is motion",
+        "choices": [
+            {
+                "id":1,
+                "choice": "Motion 1",
+                "icon": "/images/icon1"
+            },
+            {
+                "id":2,
+                "choice": "Motion 2",
+                "icon": "/images/icon2"
+            },
+            {
+                "id":3,
+                "choice": "Motion 3",
+                "icon": "/images/icon3"
+            },
+            {
+                "id":4,
+                "choice": "Motion 4",
+                "icon": "/images/icon4"
+            }
+        ],
+        
+        "answer": {
+            "id": 2,
+            "choice": "Motion 2",
+            "icon":"/images/icon2"
+        }
+    },
+    {
+        "id": 2,
+        "question" : "What is speed",
+        "choices": [
+            {
+                "id":1,
+                "choice": "speed 1",
+                "icon": "/images/icon1"
+            },
+            {
+                "id":2,
+                "choice": "speed 2",
+                "icon": "/images/icon2"
+            },
+            {
+                "id":3,
+                "choice": "speed 3",
+                "icon": "/images/icon3"
+            },
+            {
+                "id":4,
+                "choice": "speed 4",
+                "icon": "/images/icon4"
+            }
+        ],
+        
+        "answer": {
+            "id": 2,
+            "choice": "speed 4",
+            "icon":"/images/icon4"
+        }
+    }
+]
