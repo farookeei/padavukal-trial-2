@@ -51,8 +51,15 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
             onError: (error) {
               setState(() {
                 errorMessage = error.toString();
+                print(error.toString());
+                Scaffold.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(errorMessage),
+                  ),
+                );
+
+                Navigator.pop(context);
               });
-              print(error.toString());
             },
             onPageError: (page, error) {
               setState(() {
