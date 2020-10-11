@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:padavukal/providers/models/video_model.dart';
+import 'package:padavukal/services/basicConfig.dart';
+import 'package:padavukal/services/pdfservice.dart';
 import 'package:padavukal/styles/styles.dart';
 import 'package:padavukal/widgets/buttons/BlueButton.dart';
 
 class Description extends StatelessWidget {
+  final VideoModel videoDetials;
+
+  const Description({Key key, this.videoDetials}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
@@ -26,7 +33,7 @@ class Description extends StatelessWidget {
                   Container(
                     width: deviceSize.width * 0.3,
                     child: Text(
-                      "Chapter 1 | Video 1",
+                      "Chapter ${videoDetials.chapters}",
                       overflow: TextOverflow.ellipsis,
                       style: chapsubheading,
                     ),
@@ -34,7 +41,12 @@ class Description extends StatelessWidget {
                 ],
               ),
               FlatButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  PDFService(
+                    context: context,
+                    url: baseURL + videoDetials.notes,
+                  ).showPdf();
+                },
                 icon: Icon(
                   MdiIcons.noteText,
                   color: Theme.of(context).accentColor,

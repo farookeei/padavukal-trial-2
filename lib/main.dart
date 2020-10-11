@@ -7,7 +7,6 @@ import 'providers/course.dart';
 import 'providers/user.dart';
 import 'screens/auth/login_screen.dart';
 import 'screens/auth/signup_screen.dart';
-import 'screens/chapDetails/chapDetails.dart';
 import 'screens/chapter_overview/chapterOverview_screen.dart';
 import 'screens/course_screen/courses_screen.dart';
 import 'screens/home/homeScreen.dart';
@@ -77,7 +76,6 @@ class _MyAppState extends State<MyApp> {
           OtpScreen.routeName: (ctx) => OtpScreen(),
           CourseScreen.routeName: (ctx) => CourseScreen(),
           ChapterOverView.routeName: (ctx) => ChapterOverView(),
-          ChapDetails.routeName: (ctx) => ChapDetails(),
           TestOverviewScreen.routeName: (ctx) => TestOverviewScreen(),
           ProfileScreen.routeName: (ctx) => ProfileScreen(),
           RazorPay.routeName: (ctx) => RazorPay(),
