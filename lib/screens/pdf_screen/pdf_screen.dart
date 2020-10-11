@@ -23,13 +23,11 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Document"),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.share),
-            onPressed: () {},
-          ),
-        ],
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
       ),
       body: Stack(
         children: <Widget>[
@@ -53,8 +51,15 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
             onError: (error) {
               setState(() {
                 errorMessage = error.toString();
+                print(error.toString());
+                Scaffold.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(errorMessage),
+                  ),
+                );
+
+                Navigator.pop(context);
               });
-              print(error.toString());
             },
             onPageError: (page, error) {
               setState(() {
@@ -86,21 +91,21 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
                 )
         ],
       ),
-      floatingActionButton: FutureBuilder<PDFViewController>(
-        future: _controller.future,
-        builder: (context, AsyncSnapshot<PDFViewController> snapshot) {
-          if (snapshot.hasData) {
-            return FloatingActionButton.extended(
-              label: Text("Go to ${pages ~/ 2}"),
-              onPressed: () async {
-                await snapshot.data.setPage(pages ~/ 2);
-              },
-            );
-          }
+      // floatingActionButton: FutureBuilder<PDFViewController>(
+      //   future: _controller.future,
+      //   builder: (context, AsyncSnapshot<PDFViewController> snapshot) {
+      //     if (snapshot.hasData) {
+      //       return FloatingActionButton.extended(
+      //         label: Text("Go to ${pages ~/ 2}"),
+      //         onPressed: () async {
+      //           await snapshot.data.setPage(pages ~/ 2);
+      //         },
+      //       );
+      //     }
 
-          return Container();
-        },
-      ),
+      //     return Container();
+      //   },
+      // ),
     );
   }
 }

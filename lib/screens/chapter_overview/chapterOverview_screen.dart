@@ -69,10 +69,13 @@ class ChapterOverView extends StatelessWidget {
                             style: whiteheading,
                           ),
                           Text(
-                              // "${subject.totalChapters} Chapters | ${subject.totalVideos} videos",
-                              " Chapters |  videos",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 12))
+                            // "${subject.totalChapters} Chapters | ${subject.totalVideos} videos",
+                            " Chapters |  videos",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                            ),
+                          )
                         ],
                       ),
                     ),
@@ -93,21 +96,24 @@ class ChapterOverView extends StatelessWidget {
                   style: chapheading, //STYLES.DART
                 ),
               ),
-              Consumer<CourseProvider>(builder: (ctx, chapData, _) {
-                return chapData.isLoading
-                    ? LoadingWidget(
-                        title: "Loading Chapters",
-                      )
-                    : Container(
-                        height: MediaQuery.of(context).size.height / 0.75,
-                        child: ListView.builder(
+              Consumer<CourseProvider>(
+                builder: (ctx, chapData, _) {
+                  return chapData.isLoading
+                      ? LoadingWidget(
+                          title: "Loading Chapters",
+                        )
+                      : Container(
+                          height: MediaQuery.of(context).size.height / 0.75,
+                          child: ListView.builder(
                             itemCount: chapData.chapterData.length,
                             itemBuilder: (ctx, index) {
                               return ChapterWidget(
                                   chapterData: chapData.chapterData[index]);
-                            }),
-                      );
-              })
+                            },
+                          ),
+                        );
+                },
+              )
             ],
           ),
         ),
@@ -158,13 +164,14 @@ class ChapterWidget extends StatelessWidget {
               //! have to make dynamic
               itemBuilder: (ctx, i) {
                 final VideoModel videos = chapterData.videos[i];
+                print('$i - ${videos.notes}');
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (_) => ChapDetails(
-                          videoUrl: videos.url,
+                          videoDetails: videos,
                         ),
                       ),
                     );

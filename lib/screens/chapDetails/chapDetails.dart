@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:padavukal/styles/styles.dart';
-import 'package:padavukal/widgets/buttons/popbutton.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:padavukal/providers/models/video_model.dart';
+import 'package:vimeoplayer/vimeoplayer.dart';
+
+import '../../styles/styles.dart';
+import '../../widgets/buttons/popbutton.dart';
 import 'widgets/description.dart';
 import 'widgets/related_videos.dart';
 
 class ChapDetails extends StatefulWidget {
   static const routeName = "/sub-details";
 
-  final String videoUrl;
+  final VideoModel videoDetails;
 
   const ChapDetails({
     Key key,
-    @required this.videoUrl,
+    @required this.videoDetails,
   }) : super(key: key);
 
   @override
@@ -21,34 +23,8 @@ class ChapDetails extends StatefulWidget {
 }
 
 class _ChapDetailsState extends State<ChapDetails> {
-  // String videoURL = "https://youtu.be/80pRyn7fZRk";
-
-  YoutubePlayerController _controller;
-
-  @override
-  void initState() {
-    print(widget.videoUrl);
-    _controller = YoutubePlayerController(
-      flags: YoutubePlayerFlags(
-        autoPlay: true,
-        controlsVisibleAtStart: true,
-      ),
-      initialVideoId: YoutubePlayer.convertUrlToId(widget.videoUrl),
-    );
-
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
-    // User currentUser =
-    //     Provider.of<UserProvider>(context, listen: false).currentUser;
-
-    //  String url = Provider.of<CourseProvider>(context, listen: false)
-    //       .chapterData[0]
-    //       .videos[0]
-    //       .url;
-
     return Scaffold(
       appBar: AppBar(
         leading: PopupButton(),
@@ -70,22 +46,19 @@ class _ChapDetailsState extends State<ChapDetails> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Image.asset(
-            //   "assets/images/bio.png",
-            //   scale: 0.1,
-            // ),
-            Container(
-              height: 250,
-              width: double.infinity,
-              child: YoutubePlayer(
-                bottomActions: [
-                  CurrentPosition(),
-                ],
-                controller: _controller,
-                showVideoProgressIndicator: true,
-              ),
+            ListView(
+              shrinkWrap: true,
+              children: [
+                VimeoPlayer(
+                  id: widget.videoDetails.url,
+                  looping: false,
+                  autoPlay: true,
+                ),
+              ],
             ),
-            Description(),
+            Description(
+              videoDetials: widget.videoDetails,
+            ),
             RelatedVideos("Related Videos"),
             RelatedVideos("Chapters 2 - Units and Measurement"),
           ],
