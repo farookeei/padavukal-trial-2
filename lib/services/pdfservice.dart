@@ -35,7 +35,7 @@ class PDFService {
     }
   }
 
-  Future<void> showPdf() async {
+  showPdf() async {
     try {
       File file = await createFileOfPdfUrl();
       Navigator.push(

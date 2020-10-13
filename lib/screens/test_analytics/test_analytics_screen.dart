@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:padavukal/providers/models/quiz/question.dart';
 import 'package:padavukal/styles/styles.dart';
 import 'package:padavukal/widgets/buttons/BlueButton.dart';
 import 'package:padavukal/widgets/buttons/popbutton.dart';
-import 'package:padavukal/screens/test_analytics/widgets/bottom_container.dart';
 import 'package:padavukal/screens/test_analytics/widgets/chart.dart';
 import 'package:padavukal/screens/test_analytics/widgets/result_bar.dart';
 
@@ -117,39 +115,40 @@ class _TestAnalyticsScreenState extends State<TestAnalyticsScreen> {
                 width: 400,
                 onPressed: () {},
               ),
-              SizedBox(height: deviceSize.width * 0.09),
-              Text(
-                "Analytics",
-                style: Theme.of(context).textTheme.headline5,
-              ),
-              SizedBox(height: deviceSize.width * 0.09),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 40, horizontal: 30),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  border: Border.all(color: Theme.of(context).primaryColor),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    BottomContainer(
-                      text1: "30",
-                      text2: "Score",
-                      icon: MdiIcons.trophyVariant,
-                    ),
-                    BottomContainer(
-                      text1: "30s",
-                      text2: "Pre questions",
-                      icon: MdiIcons.timelapse,
-                    ),
-                    BottomContainer(
-                      text1: "23m",
-                      text2: "total time",
-                      icon: MdiIcons.clockOutline,
-                    )
-                  ],
-                ),
-              )
+              //* Ignored for now
+              // SizedBox(height: deviceSize.width * 0.09),
+              // Text(
+              //   "Analytics",
+              //   style: Theme.of(context).textTheme.headline5,
+              // ),
+              // SizedBox(height: deviceSize.width * 0.09),
+              // Container(
+              //   padding: EdgeInsets.symmetric(vertical: 40, horizontal: 30),
+              //   decoration: BoxDecoration(
+              //     borderRadius: BorderRadius.circular(5),
+              //     border: Border.all(color: Theme.of(context).primaryColor),
+              //   ),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //     children: [
+              //       BottomContainer(
+              //         text1: "30",
+              //         text2: "Score",
+              //         icon: MdiIcons.trophyVariant,
+              //       ),
+              //       BottomContainer(
+              //         text1: "30s",
+              //         text2: "Pre questions",
+              //         icon: MdiIcons.timelapse,
+              //       ),
+              //       BottomContainer(
+              //         text1: "23m",
+              //         text2: "total time",
+              //         icon: MdiIcons.clockOutline,
+              //       )
+              //     ],
+              //   ),
+              // )
             ],
           ),
         ),

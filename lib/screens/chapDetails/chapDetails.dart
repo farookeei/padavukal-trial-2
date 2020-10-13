@@ -6,7 +6,7 @@ import 'package:vimeoplayer/vimeoplayer.dart';
 import '../../styles/styles.dart';
 import '../../widgets/buttons/popbutton.dart';
 import 'widgets/description.dart';
-import 'widgets/related_videos.dart';
+// import 'widgets/related_videos.dart';
 
 class ChapDetails extends StatefulWidget {
   static const routeName = "/sub-details";
@@ -59,8 +59,8 @@ class _ChapDetailsState extends State<ChapDetails> {
             Description(
               videoDetials: widget.videoDetails,
             ),
-            RelatedVideos("Related Videos"),
-            RelatedVideos("Chapters 2 - Units and Measurement"),
+            // RelatedVideos("Related Videos"),
+            // RelatedVideos("Chapters 2 - Units and Measurement"),
           ],
         ),
       ),

@@ -65,7 +65,7 @@ class Description extends StatelessWidget {
             style: chapheading,
           ),
           SizedBox(height: 6),
-          // Text("chapDetailsMaths[0].description"),
+          Text(videoDetials.description),
           SizedBox(height: 7),
           // VideoList(subject: subject),
         ],

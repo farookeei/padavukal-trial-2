@@ -10,6 +10,7 @@ class TestContainer extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.only(top: 0),
         width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height / 4,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
           gradient: testGradient,

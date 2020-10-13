@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:padavukal/screens/blogScreen/blog.dart';
 import 'package:padavukal/screens/home/homeScreen.dart';
 import 'package:padavukal/screens/profileScreen/profile_screen.dart';
 import 'package:padavukal/screens/test_overview/test_overview.dart';
@@ -38,15 +39,17 @@ class _TabsScreenState extends State<TabsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       // body: _pages[_selectedPageIndex]["page"],
-      body: PageView(
-        controller: _pageController,
-        onPageChanged: (value) => setState(() => _selectedPageIndex = value),
-        children: [
-          HomeScreen(),
-          TestOverviewScreen(),
-          TestOverviewScreen(),
-          ProfileScreen(),
-        ],
+      body: SafeArea(
+        child: PageView(
+          controller: _pageController,
+          onPageChanged: (value) => setState(() => _selectedPageIndex = value),
+          children: [
+            HomeScreen(),
+            TestOverviewScreen(),
+            Blog(),
+            ProfileScreen(),
+          ],
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
@@ -58,19 +61,19 @@ class _TabsScreenState extends State<TabsScreen> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(MdiIcons.home),
-            label: "Home",
+            title: Text("Home"),
           ),
           BottomNavigationBarItem(
             icon: Icon(MdiIcons.textSubject),
-            label: "Test",
+            title: Text("Test"),
           ),
           BottomNavigationBarItem(
             icon: Icon(MdiIcons.book),
-            label: "Blog",
+            title: Text("Blog"),
           ),
           BottomNavigationBarItem(
             icon: Icon(MdiIcons.account),
-            label: "Profile",
+            title: Text("Profile"),
           ),
         ],
       ),

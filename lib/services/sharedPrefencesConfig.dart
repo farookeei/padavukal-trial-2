@@ -6,7 +6,7 @@ import 'package:padavukal/providers/models/exception/databaseException.dart';
 import 'package:padavukal/services/dataBaseConfig.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-abstract class SharedPreferenceConfig extends DataBaseConfig {
+class SharedPreferenceConfig extends DataBaseConfig {
   @override
   Future<Map> readData({String key}) async {
     try {
@@ -34,5 +34,11 @@ abstract class SharedPreferenceConfig extends DataBaseConfig {
     } catch (e) {
       throw e;
     }
+  }
+
+  @override
+  Future<Map> writeData({String key, Map writeMap}) {
+    // TODO: implement writeData
+    throw UnimplementedError();
   }
 }

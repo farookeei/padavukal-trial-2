@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:padavukal/controller/courseController/courseController.dart';
 import 'package:padavukal/providers/course.dart';
 import 'package:padavukal/providers/models/coursemodel.dart';
-import 'package:padavukal/providers/models/user_model.dart.dart';
-import 'package:padavukal/providers/user.dart';
 import 'package:padavukal/screens/razorpay/razorpay.dart';
 import 'package:padavukal/screens/tabsScreen/tabs_screen.dart';
 import 'package:padavukal/widgets/loading/loading.dart';
@@ -31,7 +29,7 @@ class _CourseScreenState extends State<CourseScreen> {
     );
     setState(() {
       _isLoading = true;
-      loadingMessgaes = 'verify user';
+      loadingMessgaes = 'verifying user';
     });
     try {
       dynamic _verificationResult = await _courseController.validateCourse();
@@ -40,10 +38,10 @@ class _CourseScreenState extends State<CourseScreen> {
       print(_verificationResult);
       if (_verificationResult.toString().contains("id")) {
         Navigator.of(context).pushNamed(TabsScreen.routeName);
-      }
-      if (_verificationResult['expried'] == 'Your plan is expried') {
+      } else {
         Navigator.of(context).pushNamed(RazorPay.routeName);
       }
+      // if (_verificationResult['expried'] == 'Your plan is expried')
     } catch (error) {
       print(error);
     }
@@ -68,20 +66,20 @@ class _CourseScreenState extends State<CourseScreen> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          User currentUser =
-              Provider.of<UserProvider>(context, listen: false).currentUser;
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () async {
+      //     User currentUser =
+      //         Provider.of<UserProvider>(context, listen: false).currentUser;
 
-          await Provider.of<CourseProvider>(context, listen: false)
-              .retrieveTest(userToken: currentUser.token, id: 1);
-          await Provider.of<CourseProvider>(context, listen: false)
-              .retrieveQuestions(userToken: currentUser.token, id: 1);
-        },
-        child: Icon(
-          Icons.ac_unit,
-        ),
-      ),
+      //     await Provider.of<CourseProvider>(context, listen: false)
+      //         .retrieveTest(userToken: currentUser.token, id: 1);
+      //     await Provider.of<CourseProvider>(context, listen: false)
+      //         .retrieveQuestions(userToken: currentUser.token, id: 1);
+      //   },
+      //   child: Icon(
+      //     Icons.ac_unit,
+      //   ),
+      // ),
       key: _scaffoldKey,
       body: SafeArea(
         child: Container(
@@ -102,10 +100,15 @@ class _CourseScreenState extends State<CourseScreen> {
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (BuildContext context, int index) {
                           return GradientButton(
-                            title: _courseData[index].title,
-                            color: Colors.white,
-                            onPressed: searchExpire,
-                          );
+                              title: _courseData[index].title,
+                              color: Colors.white,
+                              onPressed: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => RazorPay(
+                                              courseId: _courseData[index].id,
+                                            )),
+                                  ));
                         },
                       ),
                     )

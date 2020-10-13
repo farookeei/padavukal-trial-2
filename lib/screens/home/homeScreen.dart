@@ -5,7 +5,6 @@ import 'package:padavukal/providers/models/subject_model.dart';
 import 'package:padavukal/providers/models/user_model.dart.dart';
 import 'package:padavukal/providers/user.dart';
 import 'package:padavukal/screens/chapter_overview/chapterOverview_screen.dart';
-import 'package:padavukal/screens/home/widgets/recently_viewed.dart';
 import 'package:padavukal/screens/home/widgets/testcontainer.dart';
 import 'package:padavukal/styles/styles.dart';
 import 'package:padavukal/widgets/loading/loading.dart';
@@ -41,10 +40,10 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _buildIcon(MdiIcons.sortVariant, () {}),
-                  Row(children: [
-                    _buildIcon(MdiIcons.magnify, () {}),
-                    _buildIcon(MdiIcons.bell, () {}),
-                  ]),
+                  // Row(children: [
+                  //   _buildIcon(MdiIcons.magnify, () {}),
+                  //   _buildIcon(MdiIcons.bell, () {}),
+                  // ]),
                 ],
               ),
               SizedBox(
@@ -56,10 +55,10 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Welcome.",
+                    Text("Welcome",
                         style: Theme.of(context).primaryTextTheme.headline6),
-                    Text("${currentUser.username}",
-                        style: Theme.of(context).textTheme.headline4),
+                    // Text("${currentUser.username}",
+                    //     style: Theme.of(context).textTheme.headline4),
                     SizedBox(height: 12),
                     //* CONSUMER*******************
                     Consumer<CourseProvider>(builder: (ctx, data, _) {
@@ -68,7 +67,7 @@ class HomeScreen extends StatelessWidget {
                         physics: NeverScrollableScrollPhysics(),
                         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                           maxCrossAxisExtent: 200,
-                          childAspectRatio: 3 / 2,
+                          childAspectRatio: 2.9 / 2.3,
                           crossAxisSpacing: 17,
                           mainAxisSpacing: 17,
                         ),
@@ -125,7 +124,7 @@ class HomeScreen extends StatelessWidget {
                     SizedBox(height: 14),
                     TestContainer(),
                     SizedBox(height: 14),
-                    RecentlyViewed()
+                    // RecentlyViewed()
                   ],
                 ),
               ),

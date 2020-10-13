@@ -80,7 +80,11 @@ class _TestOverviewScreenState extends State<TestOverviewScreen> {
                                 items: courseProvider.subjectData
                                     .map<DropdownMenuItem<SubjectModel>>(
                                       (e) => DropdownMenuItem<SubjectModel>(
-                                        child: Text(e.name),
+                                        child: Row(
+                                          children: [
+                                            Text(e.name),
+                                          ],
+                                        ),
                                         value: e,
                                       ),
                                     )
@@ -93,6 +97,31 @@ class _TestOverviewScreenState extends State<TestOverviewScreen> {
                                 }),
                           ),
                         ),
+                        // Container(
+                        //   padding: EdgeInsets.symmetric(horizontal: 10),
+                        //   decoration: BoxDecoration(
+                        //     borderRadius: BorderRadius.circular(5),
+                        //     gradient: testGradient,
+                        //   ),
+                        //   child: DropdownButtonHideUnderline(
+                        //     child: DropdownButton<ChapterModel>(
+                        //         value: courseProvider.currentChapter,
+                        //         items: courseProvider.chapterData
+                        //             .map<DropdownMenuItem<ChapterModel>>(
+                        //               (e) => DropdownMenuItem<ChapterModel>(
+                        //                 child: Text(e.name),
+                        //                 value: e,
+                        //               ),
+                        //             )
+                        //             .toList(),
+                        //         onChanged: (value) {
+                        //           setState(() {
+                        //             courseProvider.setcurrentChapter(value);
+                        //             print(value);
+                        //           });
+                        //         }),
+                        //   ),
+                        // ),
                       ],
                     ),
                     SizedBox(height: _height * 0.02),

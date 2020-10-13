@@ -110,7 +110,7 @@ class TestDescription extends StatelessWidget {
                   title: "Start Exam",
                   width: 150,
                   onPressed: () {
-                    Navigator.pushNamed(
+                    Navigator.pushReplacementNamed(
                       context,
                       TestPage.routeName,
                       arguments: testInfo,

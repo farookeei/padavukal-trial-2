@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_windowmanager/flutter_windowmanager.dart';
+import 'package:padavukal/screens/aboutUs.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/course.dart';
@@ -11,7 +12,6 @@ import 'screens/chapter_overview/chapterOverview_screen.dart';
 import 'screens/course_screen/courses_screen.dart';
 import 'screens/home/homeScreen.dart';
 import 'screens/onboardscreen/onboard_screen.dart';
-import 'screens/otp_screen/otp_screen.dart';
 import 'screens/profileScreen/profile_screen.dart';
 import 'screens/razorpay/razorpay.dart';
 import 'screens/splash_screen/splash_screen.dart';
@@ -64,7 +64,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
+        title: 'Padavukal',
         theme: themes(),
         home: SplashScreen(),
         routes: {
@@ -73,12 +73,13 @@ class _MyAppState extends State<MyApp> {
           OnboardScreen.routeName: (ctx) => OnboardScreen(),
           LoginScreen.routeName: (ctx) => LoginScreen(),
           SignIn.routeName: (ctx) => SignIn(),
-          OtpScreen.routeName: (ctx) => OtpScreen(),
+          // OtpScreen.routeName: (ctx) => OtpScreen(),
           CourseScreen.routeName: (ctx) => CourseScreen(),
           ChapterOverView.routeName: (ctx) => ChapterOverView(),
           TestOverviewScreen.routeName: (ctx) => TestOverviewScreen(),
           ProfileScreen.routeName: (ctx) => ProfileScreen(),
           RazorPay.routeName: (ctx) => RazorPay(),
+          AboutUs.routeName: (ctx) => AboutUs(),
         },
         onGenerateRoute: (settings) {
           switch (settings.name) {

@@ -142,20 +142,18 @@ class ChapterWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width * 0.7,
-                child: Text(
-                  chapterData.name, //* dynamic
-                  overflow: TextOverflow.ellipsis,
-                  style: chapsubheading,
-                ),
-              ),
-              // Text("${subject.chapDetails[0].videoCount} videos")
-            ],
+
+          Container(
+            width: MediaQuery.of(context).size.width * 0.7,
+            child: Text(
+              chapterData.name, //* dynamic
+              overflow: TextOverflow.ellipsis,
+              style: chapsubheading,
+            ),
           ),
+          SizedBox(height: 7),
+          // Text("${subject.chapDetails[0].videoCount} videos")
+
           Expanded(
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -177,12 +175,13 @@ class ChapterWidget extends StatelessWidget {
                     );
                   },
                   child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(17),
-                      ),
-                      child: Image.network(
-                        "$baseURL ${chapterData.videos[i].image}",
-                        fit: BoxFit.cover,
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(7),
+                        child: Image.network(
+                          "$baseURL ${chapterData.videos[i].image}",
+                          fit: BoxFit.cover,
+                        ),
                       )),
                 );
               },

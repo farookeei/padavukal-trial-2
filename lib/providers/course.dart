@@ -14,6 +14,12 @@ class CourseProvider extends BaseConfigAPI with ChangeNotifier {
   List<CourseModel> _courseData;
   List<SubjectModel> _subjectData = [];
   List<ChapterModel> _chapterData = [];
+  dynamic _paymentMethodData = [];
+
+  //! this is the type of payment user has chosen
+  get paymentMethodData {
+    return [..._paymentMethodData];
+  }
 
   SubjectModel _currentSubject = SubjectModel(
     id: -1,
@@ -24,6 +30,19 @@ class CourseProvider extends BaseConfigAPI with ChangeNotifier {
 
   setcurrentSubject(SubjectModel subjectModel) {
     _currentSubject = subjectModel;
+    notifyListeners();
+  }
+
+  //*! testing
+  ChapterModel _currentChapter = ChapterModel(
+    id: -1,
+    name: null,
+  );
+
+  ChapterModel get currentChapter => _currentChapter;
+
+  setcurrentChapter(ChapterModel chapterModel) {
+    _currentChapter = chapterModel;
     notifyListeners();
   }
 
@@ -72,9 +91,11 @@ class CourseProvider extends BaseConfigAPI with ChangeNotifier {
     }
   }
 
-  Future<void> coursePaymnet() async {
+  //* package
+  Future<void> coursePackage({@required int id}) async {
     try {
-      final List _fetchData = await getAPI(url: '/api/package/?list=true&id=1');
+      final List _fetchData =
+          await getAPI(url: '/api/package/?list=true&id=$id');
       if (_fetchData == null) return null;
 
       _coursePaymnetData = _fetchData
@@ -88,6 +109,22 @@ class CourseProvider extends BaseConfigAPI with ChangeNotifier {
           .toList();
       notifyListeners(); //* check if necessary
     } catch (e) {
+      throw e;
+    }
+  }
+
+  //* payment
+  Future<void> paymentMethod({@required String userToken}) async {
+    try {
+      if (userToken == null) return null;
+      if (userToken == 'null') return null;
+      List _fetchData =
+          await getAPI(url: '/api/payment/?package_id=1', token: userToken);
+      print(" paymentmode $_fetchData");
+      _paymentMethodData = [];
+      _paymentMethodData = _fetchData;
+    } catch (e) {
+      print(e);
       throw e;
     }
   }
@@ -144,8 +181,10 @@ class CourseProvider extends BaseConfigAPI with ChangeNotifier {
   }
 
   //* the id received here is chapter id
-  Future<List<TestModel>> retrieveTest(
-      {@required String userToken, @required int id}) async {
+  Future<List<TestModel>> retrieveTest({
+    @required String userToken,
+    @required int id,
+  }) async {
     try {
       if (userToken == null) return null;
       if (userToken == "null") return null;

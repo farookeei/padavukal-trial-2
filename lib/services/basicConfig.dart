@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:padavukal/providers/models/exception/httpException.dart';
 
-const baseURL = 'http://13.234.117.161:8000';
+String baseURL = 'http://13.234.117.161:8000';
 
 abstract class BaseConfigAPI {
   String baseURL = 'http://13.234.117.161:8000';

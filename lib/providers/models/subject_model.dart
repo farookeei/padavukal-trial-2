@@ -36,19 +36,19 @@ class SubjectStatic {
 final List<SubjectStatic> subjects = [
   SubjectStatic(
     color: Color.fromRGBO(87, 113, 251, 100),
-    imageUrl: "assets/images/maths.png",
-  ),
-  SubjectStatic(
-    color: Color.fromRGBO(243, 163, 42, 100),
     imageUrl: "assets/images/phy.png",
   ),
   SubjectStatic(
-    color: Color.fromRGBO(71, 182, 53, 100),
+    color: Color.fromRGBO(243, 163, 42, 100),
     imageUrl: "assets/images/chem.png",
   ),
   SubjectStatic(
-    color: Color.fromRGBO(249, 92, 92, 100),
+    color: Color.fromRGBO(71, 182, 53, 100),
     imageUrl: "assets/images/bio.png",
+  ),
+  SubjectStatic(
+    color: Color.fromRGBO(249, 92, 92, 100),
+    imageUrl: "assets/images/maths.png",
   ),
 ];
 

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:padavukal/controller/userController/userContoller.dart';
-import 'package:padavukal/screens/auth/login_screen.dart';
+import 'package:padavukal/screens/course_screen/courses_screen.dart';
 import 'package:padavukal/widgets/buttons/BlueButton.dart';
-import 'package:padavukal/widgets/buttons/outline_button.dart';
 
 class SignIn extends StatefulWidget {
   static const routeName = "/signin";
@@ -45,7 +44,7 @@ class _SignInState extends State<SignIn> {
 
       if (_fetchData != null) {
         if (_fetchData.isNotEmpty) {
-          Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+          Navigator.pushReplacementNamed(context, CourseScreen.routeName);
         }
       }
 
@@ -228,13 +227,13 @@ class _SignInState extends State<SignIn> {
                           width: 370,
                           onPressed: signup,
                         ),
-                        Text("Or"),
+                        // Text("Or"),
                         SizedBox(height: 10),
-                        OutLinedButton(
-                          title: "Sign in with Google",
-                          imageUrl: "assets/images/googleIcon.png",
-                          width: deviceSize.width * 0.234,
-                        )
+                        // OutLinedButton(
+                        //   title: "Sign in with Google",
+                        //   imageUrl: "assets/images/googleIcon.png",
+                        //   width: deviceSize.width * 0.234,
+                        // )
                       ],
                     ),
                   ),

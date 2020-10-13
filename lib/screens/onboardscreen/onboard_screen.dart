@@ -41,12 +41,12 @@ class OnboardScreen extends StatelessWidget {
                     subtitle: "Learn From Home",
                     imageUrl: "assets/images/onboard3.png",
                   ),
-                  OnboardItem(
-                    title: "Study Online",
-                    subtitle:
-                        "Study online means you can study anywhere,anytime",
-                    imageUrl: "assets/images/onboard1.png",
-                  ),
+                  // OnboardItem(
+                  //   title: "Study Online",
+                  //   subtitle:
+                  //       "Study online means you can study anywhere,anytime",
+                  //   imageUrl: "assets/images/onboard1.png",
+                  // ),
                 ],
               ),
             ),
@@ -54,7 +54,8 @@ class OnboardScreen extends StatelessWidget {
               title: "Skip",
               width: 100,
               onPressed: () {
-                Navigator.of(context).pushNamed(LoginScreen.routeName);
+                Navigator.of(context)
+                    .pushReplacementNamed(LoginScreen.routeName);
               },
             )
           ]),

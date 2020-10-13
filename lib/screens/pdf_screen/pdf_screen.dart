@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'package:padavukal/styles/styles.dart';
 
 class PDFScreen extends StatefulWidget {
   final String path;
@@ -15,6 +16,7 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
   final Completer<PDFViewController> _controller =
       Completer<PDFViewController>();
   int pages = 0;
+  // int _requiredPage = 0;
   int currentPage = 0;
   bool isReady = false;
   String errorMessage = '';
@@ -23,11 +25,16 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Colors.black,
+        title: Text(
+          "Document",
+          style: whiteheading2,
         ),
-        backgroundColor: Colors.white,
-        elevation: 0,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.share),
+            onPressed: () {},
+          ),
+        ],
       ),
       body: Stack(
         children: <Widget>[
@@ -51,15 +58,8 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
             onError: (error) {
               setState(() {
                 errorMessage = error.toString();
-                print(error.toString());
-                Scaffold.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(errorMessage),
-                  ),
-                );
-
-                Navigator.pop(context);
               });
+              print(error.toString());
             },
             onPageError: (page, error) {
               setState(() {

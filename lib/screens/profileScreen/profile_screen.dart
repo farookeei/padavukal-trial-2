@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:padavukal/providers/models/user_model.dart.dart';
-import 'package:padavukal/providers/user.dart';
+import 'package:padavukal/screens/aboutUs.dart';
+import 'package:padavukal/screens/course_screen/courses_screen.dart';
 import 'package:padavukal/widgets/buttons/popbutton.dart';
-import 'package:provider/provider.dart';
+
 import 'package:share/share.dart';
 
 class ProfileScreen extends StatelessWidget {
   static const routeName = "profile";
   @override
   Widget build(BuildContext context) {
-    User currentUser =
-        Provider.of<UserProvider>(context, listen: false).currentUser;
+    // User currentUser =
+    //     Provider.of<UserProvider>(context, listen: false).currentUser;
 
     return Scaffold(
       // appBar: AppBar(
@@ -57,7 +57,8 @@ class ProfileScreen extends StatelessWidget {
                               height:
                                   MediaQuery.of(context).size.height * 0.010),
                           Text(
-                            currentUser.username, //* have to change
+                            // currentUser.name, //* have to change
+                            "User",
                             style: Theme.of(context).textTheme.headline5,
                           )
                         ],
@@ -65,10 +66,21 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
               Info(icon: MdiIcons.phone, title: "987654321"),
-              Info(icon: MdiIcons.email, title: currentUser.email),
-              Info(icon: MdiIcons.syncIcon, title: "Change Course"),
+              Info(icon: MdiIcons.email, title: "email"),
+              // currentUser.email
+              Info(
+                icon: MdiIcons.syncIcon,
+                title: "Change Course",
+                onPressed: () =>
+                    Navigator.of(context).pushNamed(CourseScreen.routeName),
+              ),
               Info(icon: MdiIcons.messageAlert, title: "Terms and Conditions"),
-              Info(icon: MdiIcons.information, title: "About us"),
+              Info(
+                icon: MdiIcons.information,
+                title: "About us",
+                onPressed: () =>
+                    Navigator.of(context).pushNamed(AboutUs.routeName),
+              ),
               Info(icon: MdiIcons.phoneDial, title: "Contact us"),
               Info(icon: MdiIcons.hand, title: "Help"),
               Info(

@@ -2,8 +2,9 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:padavukal/providers/course.dart';
 import 'package:padavukal/providers/models/coursePayment.dart';
-import 'package:padavukal/screens/course_screen/courses_screen.dart';
-import 'package:padavukal/styles/styles.dart';
+import 'package:padavukal/providers/models/user_model.dart.dart';
+import 'package:padavukal/providers/user.dart';
+import 'package:padavukal/screens/tabsScreen/tabs_screen.dart';
 import 'package:padavukal/widgets/errornotifire/errorMessage.dart';
 import 'package:padavukal/widgets/loading/loading.dart';
 import 'package:provider/provider.dart';
@@ -11,15 +12,20 @@ import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class RazorPay extends StatefulWidget {
   static const routeName = "/razorpay";
+
+  final int courseId;
+
+  RazorPay({this.courseId});
+
   @override
   _RazorPayState createState() => _RazorPayState();
 }
 
 class _RazorPayState extends State<RazorPay> {
-  List<String> desc = [
-    "Try premium",
-    "Can't use all packages",
-  ];
+  // List<String> desc = [
+  //   "Try premium",
+  //   "Can't use all packages",
+  // ];
   Razorpay _razorpay;
   List<CoursePaymentModel> _courspaymnetData;
   bool _isLoading = true;
@@ -42,9 +48,13 @@ class _RazorPayState extends State<RazorPay> {
     super.dispose();
   }
 
-  void trailPlan() {
+  void trailPlan() async {
     errorMessage(scaffold: _scaffoldkey, message: 'You selected trail Plan');
-    Navigator.of(context).pushReplacementNamed(CourseScreen.routeName);
+    User currentUser =
+        Provider.of<UserProvider>(context, listen: false).currentUser;
+    Provider.of<CourseProvider>(context, listen: false)
+        .paymentMethod(userToken: currentUser.token);
+    Navigator.of(context).pushReplacementNamed(TabsScreen.routeName);
   }
 
   void opencheckout({double totalAmount}) {
@@ -86,9 +96,10 @@ class _RazorPayState extends State<RazorPay> {
     errorMessage(scaffold: _scaffoldkey, message: 'External vallet');
   }
 
+  //*! the id from courseScreen is passed here **********
   Future<void> fetchData() async {
     await Provider.of<CourseProvider>(context, listen: false)
-        .coursePaymnet()
+        .coursePackage(id: widget.courseId)
         .catchError((e) => setState(() => _errorMsg = true));
     _courspaymnetData =
         Provider.of<CourseProvider>(context, listen: false).coursePaymnetData;
@@ -154,10 +165,10 @@ class _RazorPayState extends State<RazorPay> {
                                                 .primaryTextTheme
                                                 .headline6,
                                           ),
-                                          Text(
-                                            desc[i],
-                                            style: onboardSubitleStyle,
-                                          ),
+                                          // Text(
+                                          //   desc[i],
+                                          //   style: onboardSubitleStyle,
+                                          // ),
                                           SizedBox(height: 20),
                                           Row(
                                             mainAxisAlignment:
