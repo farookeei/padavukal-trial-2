@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:padavukal/controller/userController/userContoller.dart';
+import 'package:padavukal/providers/course.dart';
+import 'package:padavukal/providers/models/user_model.dart.dart';
+import 'package:padavukal/providers/user.dart';
 import 'package:padavukal/screens/course_screen/courses_screen.dart';
 import 'package:padavukal/widgets/buttons/BlueButton.dart';
+import 'package:provider/provider.dart';
 
 class SignIn extends StatefulWidget {
   static const routeName = "/signin";
@@ -44,6 +48,10 @@ class _SignInState extends State<SignIn> {
 
       if (_fetchData != null) {
         if (_fetchData.isNotEmpty) {
+          User currentUser =
+              Provider.of<UserProvider>(context, listen: false).currentUser;
+          Provider.of<CourseProvider>(context, listen: false)
+              .paymentMethod(userToken: currentUser.token);
           Navigator.pushReplacementNamed(context, CourseScreen.routeName);
         }
       }

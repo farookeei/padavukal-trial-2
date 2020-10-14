@@ -118,13 +118,13 @@ class CourseProvider extends BaseConfigAPI with ChangeNotifier {
     try {
       if (userToken == null) return null;
       if (userToken == 'null') return null;
-      List _fetchData =
+      dynamic _fetchData =
           await getAPI(url: '/api/payment/?package_id=1', token: userToken);
       print(" paymentmode $_fetchData");
       _paymentMethodData = [];
       _paymentMethodData = _fetchData;
     } catch (e) {
-      print(e);
+      print("rr $e");
       throw e;
     }
   }

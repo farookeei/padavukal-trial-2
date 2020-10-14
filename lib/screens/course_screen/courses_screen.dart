@@ -65,21 +65,8 @@ class _CourseScreenState extends State<CourseScreen> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    return Scaffold(
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () async {
-      //     User currentUser =
-      //         Provider.of<UserProvider>(context, listen: false).currentUser;
 
-      //     await Provider.of<CourseProvider>(context, listen: false)
-      //         .retrieveTest(userToken: currentUser.token, id: 1);
-      //     await Provider.of<CourseProvider>(context, listen: false)
-      //         .retrieveQuestions(userToken: currentUser.token, id: 1);
-      //   },
-      //   child: Icon(
-      //     Icons.ac_unit,
-      //   ),
-      // ),
+    return Scaffold(
       key: _scaffoldKey,
       body: SafeArea(
         child: Container(
@@ -100,15 +87,18 @@ class _CourseScreenState extends State<CourseScreen> {
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (BuildContext context, int index) {
                           return GradientButton(
-                              title: _courseData[index].title,
-                              color: Colors.white,
-                              onPressed: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) => RazorPay(
-                                              courseId: _courseData[index].id,
-                                            )),
-                                  ));
+                            title: _courseData[index].title,
+                            color: Colors.white,
+                            // onPressed: () => Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //       builder: (_) => RazorPay(
+                            //             courseId: _courseData[index].id,
+                            //           )),
+                            // ),
+                            onPressed: () => Navigator.pushReplacementNamed(
+                                context, TabsScreen.routeName),
+                          );
                         },
                       ),
                     )
