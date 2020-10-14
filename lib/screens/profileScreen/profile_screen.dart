@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:padavukal/screens/aboutUs.dart';
 import 'package:padavukal/screens/course_screen/courses_screen.dart';
+import 'package:padavukal/screens/razorpay/razorpay.dart';
 import 'package:padavukal/widgets/buttons/popbutton.dart';
 
 import 'package:share/share.dart';
@@ -68,11 +69,17 @@ class ProfileScreen extends StatelessWidget {
               Info(icon: MdiIcons.phone, title: "987654321"),
               Info(icon: MdiIcons.email, title: "email"),
               // currentUser.email
+              // Info(
+              //   icon: MdiIcons.syncIcon,
+              //   title: "Change Course",
+              //   onPressed: () =>
+              //       Navigator.of(context).pushNamed(CourseScreen.routeName),
+              // ),
               Info(
                 icon: MdiIcons.syncIcon,
-                title: "Change Course",
+                title: "Get Premium Package",
                 onPressed: () =>
-                    Navigator.of(context).pushNamed(CourseScreen.routeName),
+                    Navigator.of(context).pushNamed(RazorPay.routeName),
               ),
               Info(icon: MdiIcons.messageAlert, title: "Terms and Conditions"),
               Info(

@@ -15,7 +15,7 @@ class RazorPay extends StatefulWidget {
 
   final int courseId;
 
-  RazorPay({this.courseId});
+  RazorPay({this.courseId = 2});
 
   @override
   _RazorPayState createState() => _RazorPayState();
