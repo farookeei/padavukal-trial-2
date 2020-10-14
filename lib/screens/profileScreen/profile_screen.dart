@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:padavukal/screens/aboutUs.dart';
+<<<<<<< HEAD
+=======
+import 'package:padavukal/screens/course_screen/courses_screen.dart';
+>>>>>>> 3da2de9cfda49440711107c1db1d5f445c33b44a
 import 'package:padavukal/screens/razorpay/razorpay.dart';
 import 'package:padavukal/widgets/buttons/popbutton.dart';
 
