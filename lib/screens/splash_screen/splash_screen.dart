@@ -14,7 +14,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void didChangeDependencies() {
-    Timer(Duration(seconds: 2), () async {
+    Timer(Duration(seconds: 30), () async {
       bool _result = await Provider.of<UserProvider>(context, listen: false)
           .checkCurrentUser();
 
@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Center(
           child: Image.asset(
         "assets/images/padavukal.jpg",
-        scale: 1.5,
+        scale: 2.3,
       )),
     );
   }

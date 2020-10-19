@@ -122,70 +122,69 @@ class _RazorPayState extends State<RazorPay> {
       key: _scaffoldkey,
       body: SafeArea(
         child: Container(
-            width: double.infinity,
-            padding: EdgeInsets.all(10),
-            child: _isLoading
-                ? LoadingWidget(title: 'Loading Payment')
-                : _errorMsg
-                    ? Text('Error Occured',
-                        style: Theme.of(context).textTheme.headline5)
-                    : Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Packages",
-                            style: Theme.of(context).textTheme.headline5,
-                          ),
-                          SizedBox(height: 20),
-                          Container(
-                            height: deviceSize.height * 0.8,
-                            margin: EdgeInsets.all(20),
-                            child: ListView.builder(
-                                itemCount: _courspaymnetData.length,
-                                itemBuilder: (ctx, i) {
-                                  return Container(
-                                    margin: EdgeInsets.all(20),
-                                    child: OutlineButton(
-                                      onPressed: () => opencheckout(
-                                          totalAmount: double.parse(
-                                              _courspaymnetData[i].amount)),
-                                      padding: EdgeInsets.all(50),
-                                      borderSide:
-                                          BorderSide(color: Colors.blue),
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5)),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Text(
-                                            _courspaymnetData[i].name,
-                                            style: Theme.of(context)
-                                                .primaryTextTheme
-                                                .headline6,
-                                          ),
-                                          // Text(
-                                          //   desc[i],
-                                          //   style: onboardSubitleStyle,
-                                          // ),
-                                          SizedBox(height: 20),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              Text(
-                                                  "For  ${_courspaymnetData[i].amount}"),
-                                            ],
-                                          )
-                                        ],
-                                      ),
+          width: double.infinity,
+          padding: EdgeInsets.all(10),
+          child: _isLoading
+              ? LoadingWidget(title: 'Loading Payment')
+              : _errorMsg
+                  ? Text('Error Occured',
+                      style: Theme.of(context).textTheme.headline5)
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Packages",
+                          style: Theme.of(context).textTheme.headline5,
+                        ),
+                        SizedBox(height: 20),
+                        Container(
+                          height: deviceSize.height * 0.8,
+                          margin: EdgeInsets.all(20),
+                          child: ListView.builder(
+                              itemCount: _courspaymnetData.length,
+                              itemBuilder: (ctx, i) {
+                                return Container(
+                                  margin: EdgeInsets.all(20),
+                                  child: OutlineButton(
+                                    onPressed: () => opencheckout(
+                                        totalAmount: double.parse(
+                                            _courspaymnetData[i].amount)),
+                                    padding: EdgeInsets.all(50),
+                                    borderSide: BorderSide(color: Colors.blue),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(5)),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Text(
+                                          _courspaymnetData[i].name,
+                                          style: Theme.of(context)
+                                              .primaryTextTheme
+                                              .headline6,
+                                        ),
+                                        // Text(
+                                        //   desc[i],
+                                        //   style: onboardSubitleStyle,
+                                        // ),
+                                        SizedBox(height: 20),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            Text(
+                                                "For  ${_courspaymnetData[i].amount}"),
+                                          ],
+                                        )
+                                      ],
                                     ),
-                                  );
-                                }),
-                          ),
-                        ],
-                      )),
+                                  ),
+                                );
+                              }),
+                        ),
+                      ],
+                    ),
+        ),
       ),
     );
   }
